@@ -1,8 +1,9 @@
 import React from 'react';
+import './header.scss';
 
 function Header() {
   return (
-    <header className="App-header">
+    <header className="header">
       <h1>Тут шапка</h1>
     </header>
   );
