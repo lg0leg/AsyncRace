@@ -1,10 +1,18 @@
 import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import './header.scss';
 
 function Header() {
   return (
     <header className="header">
-      <h1>Тут шапка</h1>
+      <nav className="nav">
+        <Link to="/garage" className="nav-item">
+          Garage
+        </Link>
+        <Link to="/winners" className="nav-item">
+          Winners
+        </Link>
+      </nav>
     </header>
   );
 }
