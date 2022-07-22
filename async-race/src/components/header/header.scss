@@ -1,6 +1,8 @@
+@import '../../utils/colors';
+
 .header {
-  color: #252c41;
-  background-color: #f4f5f9;
+  color: $navy;
+  background-color: $gray-l;
   padding: 30px;
 }
 
@@ -11,7 +13,7 @@
 
 .nav-item {
   text-decoration: none;
-  color: #252c41;
+  color: $navy;
   font-size: 24px;
   font-weight: 700;
   opacity: 0.8;
