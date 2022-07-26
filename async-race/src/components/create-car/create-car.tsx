@@ -1,6 +1,5 @@
 import './create-car.scss';
 import ColorPicker from '../../utils/color-picker';
-// import { SketchPicker } from 'react-color';
 
 export default function CreateCar() {
   return (
