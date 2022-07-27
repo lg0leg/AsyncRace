@@ -8,7 +8,7 @@ export default function UpdateCar() {
   return (
     <div className="update-car">
       <input type="text" className="choice-name" />
-      <div className="choice-color">
+      <div className="update-choice-color">
         <PopoverPicker color={color} onChange={setColor} />
       </div>
       <button type="button" className="update-button">
