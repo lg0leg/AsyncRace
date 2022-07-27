@@ -11,6 +11,7 @@ function Main() {
       <Routes>
         <Route index element={<Garage />} />
         <Route path="/" element={<Navigate replace to="/garage" />} />
+        <Route path="/AsyncRace" element={<Navigate replace to="/garage" />} />
         <Route path="/garage" element={<Garage />} />
         <Route path="/winners" element={<Winners />} />
         <Route path="*" element={<NotFoundPage />} />
