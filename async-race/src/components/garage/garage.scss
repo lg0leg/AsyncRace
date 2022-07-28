@@ -1,13 +1,14 @@
 @import '../../utils/colors';
 
 .garage {
-  height: 800px;
+  min-height: 100%;
   background-color: $gray-d;
 }
 
 .garage-controls {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .garage-controls-2 {
