@@ -7,7 +7,7 @@ export default function Raceline() {
       <div className="car-select">
         <button className="select-car">Select</button>
         <button className="select-car">Remove</button>
-        <div className="car-title">Carname</div>
+        <div className="car-title">CarName</div>
       </div>
       <div className="car-cont">
         <div className="start-stop">
