@@ -11,9 +11,9 @@ import Raceline from '../race-line/race-line';
 
 // const items = [<Raceline />, <Raceline />, <Raceline />, <Raceline />, <Raceline />, <Raceline />];
 const items = [
-  ...Array(100)
+  ...Array(14)
     .fill(0)
-    .map(() => <Raceline />),
+    .map((item, idx) => <Raceline key={idx} name={'Audi'} />),
 ];
 
 export default function Garage() {

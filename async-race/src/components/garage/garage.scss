@@ -45,14 +45,14 @@
 
 /*for pagination*/
 
-ul {
+.garage-raceway ul {
   padding: 0;
   margin: 10px 0px 0px 20px;
   display: flex;
   gap: 5px;
 }
 
-li {
+.garage-raceway li {
   width: 30px;
   height: 30px;
   list-style: none;
@@ -60,17 +60,17 @@ li {
   border-radius: 5px;
 }
 
-li:first-child,
-li:last-child {
+.garage-raceway li:first-child,
+.garage-raceway li:last-child {
   width: 40px;
 }
 
-li:hover {
+.garage-raceway li:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-a {
+.garage-raceway a {
   width: 100%;
   height: 100%;
   display: flex;
@@ -79,6 +79,6 @@ a {
   user-select: none;
 }
 
-.selected {
+.garage-raceway .selected {
   background-color: $gray-d;
 }
