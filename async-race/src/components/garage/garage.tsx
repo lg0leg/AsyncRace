@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-
+import { carList } from '../../utils/carNames/carNames';
 import './garage.scss';
 import CreateCar from '../create-car/create-car';
 import UpdateCar from '../update-car/update-car';
@@ -17,6 +17,25 @@ const items = [
 ];
 
 export default function Garage() {
+  const generateCars = () => {
+    let arrCarNames = [];
+    while (arrCarNames.length < 10) {
+      let num1 = Math.floor(Math.random() * 296);
+      let num2 = Math.floor(Math.random() * Object.values(carList)[num1].length);
+      let Brand = Object.keys(carList)[num1];
+      let Model = Object.values(carList)[num1][num2];
+      arrCarNames.push(`${Brand} ${Model}`);
+    }
+    setCars({ arrCarNames });
+
+    console.log(arrCarNames);
+    console.log(cars);
+  };
+
+  const [cars, setCars] = useState<{ arrCarNames: string[] }>({
+    arrCarNames: [],
+  });
+
   return (
     <div className="garage">
       <div className="garage-controls">
@@ -27,7 +46,7 @@ export default function Garage() {
         <div className="garage-controls-2">
           <RaceBtn />
           <ResetBtn />
-          <GenerateCarsBtn />
+          <GenerateCarsBtn clickHandler={generateCars} />
         </div>
       </div>
       <div className="garage-titles">
