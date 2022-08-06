@@ -10,8 +10,6 @@ import GenerateCarsBtn from '../generate-cars-button/generate-cars-button';
 import Raceline from '../race-line/race-line';
 
 export default function Garage() {
-  // let items: string[] = ['car1', 'car2', 'car3', 'car4', 'car5', 'car6', 'car7', 'car8', 'car9', 'car10'];
-
   const [cars, setCars] = useState<{ arrCarNames: string[] }>({
     arrCarNames: [],
   });
