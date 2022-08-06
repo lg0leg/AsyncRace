@@ -65,7 +65,7 @@ export default function Garage() {
           Garage (<span id="total-car-counter">0</span>)
         </h1>
       </div>
-      <div className="garage-raceway">{currentItems && (currentItems as string[]).map((item: string, idx: number) => <Raceline key={idx + Math.random()} name={item} />)}</div>
+      <div className="garage-raceway">{currentItems && (currentItems as string[]).map((item: string, idx: number) => <Raceline key={idx + Math.random()} name={item} color={'skyblue'} />)}</div>
       <div className="garage-pagination">
         <ReactPaginate breakLabel="..." nextLabel="next" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="prev" renderOnZeroPageCount={() => null} />
       </div>

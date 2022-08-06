@@ -1,10 +1,7 @@
 import React, { RefObject, useEffect } from 'react';
 import './car-instance.scss';
 
-export default function CarInstance() {
-  let randomNum = () => Math.round(0 + Math.random() * 255);
-  const randomColor = `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
-
+export default function CarInstance(props: { color: string }) {
   const carRef: RefObject<SVGPathElement> = React.createRef();
 
   const setColor = (color: string) => {
@@ -12,7 +9,7 @@ export default function CarInstance() {
   };
 
   useEffect(() => {
-    setColor(randomColor);
+    setColor(props.color);
   });
 
   return (
