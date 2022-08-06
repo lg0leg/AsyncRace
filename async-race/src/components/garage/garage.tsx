@@ -10,42 +10,43 @@ import GenerateCarsBtn from '../generate-cars-button/generate-cars-button';
 import Raceline from '../race-line/race-line';
 
 export default function Garage() {
-  let items: string[] = ['car1', 'car2', 'car3', 'car4', 'car5', 'car6', 'car7', 'car8', 'car9', 'car10'];
+  // let items: string[] = ['car1', 'car2', 'car3', 'car4', 'car5', 'car6', 'car7', 'car8', 'car9', 'car10'];
 
   const [cars, setCars] = useState<{ arrCarNames: string[] }>({
     arrCarNames: [],
   });
-  const [currentItems, setCurrentItems] = useState(null);
+  const [currentItems, setCurrentItems] = useState(['first car']);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 7;
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    // @ts-ignore
-    setCurrentItems(items.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+
+    setCurrentItems(Object.values(cars.arrCarNames).slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(Object.keys(cars.arrCarNames).length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, cars]);
 
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
+    const newOffset = (event.selected * itemsPerPage) % Object.keys(cars.arrCarNames).length;
     setItemOffset(newOffset);
   };
 
   const generateCars = () => {
     let arrCarNames = [];
-    // let racelines: JSX.Element[] = [];
-    while (arrCarNames.length < 10) {
+    while (arrCarNames.length < 100) {
       let num1 = Math.floor(Math.random() * 296);
       let num2 = Math.floor(Math.random() * Object.values(carList)[num1].length);
       let Brand = Object.keys(carList)[num1];
       let Model = Object.values(carList)[num1][num2];
       arrCarNames.push(`${Brand} ${Model}`);
-      // racelines = arrCarNames.map((item, idx) => <Raceline key={idx + Math.random()} name={item} />);
     }
     setCars({ arrCarNames });
-    console.log(cars);
-    // setCars({ racelines });
+    // console.log('-----------------');
+    // console.log(cars);
+    // console.log(Object.values(cars));
+    // console.log(Object.keys(cars));
+    // console.log(currentItems);
   };
 
   return (
@@ -66,10 +67,7 @@ export default function Garage() {
           Garage (<span id="total-car-counter">0</span>)
         </h1>
       </div>
-      <div className="garage-raceway">
-        {/* {currentItems} */}
-        {currentItems && (currentItems as string[]).map((item: string, idx: number) => <Raceline key={idx + Math.random()} name={item} />)}
-      </div>
+      <div className="garage-raceway">{currentItems && (currentItems as string[]).map((item: string, idx: number) => <Raceline key={idx + Math.random()} name={item} />)}</div>
       <div className="garage-pagination">
         <ReactPaginate breakLabel="..." nextLabel="next" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="prev" renderOnZeroPageCount={() => null} />
       </div>
