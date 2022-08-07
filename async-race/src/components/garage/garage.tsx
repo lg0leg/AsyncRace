@@ -75,7 +75,7 @@ export default function Garage() {
       </div>
       <div className="garage-titles">
         <h1 className="garage-h1">
-          Garage (<span id="total-car-counter">0</span>)
+          Garage (<span>{cars.arrCars.length}</span>)
         </h1>
       </div>
       <div className="garage-raceway">{currentItems && currentItems.map((item: CarItem, idx: number) => <Raceline key={idx + Math.random()} name={item.name} color={item.color} />)}</div>
