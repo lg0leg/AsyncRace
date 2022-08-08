@@ -1,6 +1,6 @@
 import './create-car.scss';
 import React, { useState } from 'react';
-import { PopoverPicker } from '../../utils/colorpick/PopoverPicker.js';
+import { PopoverPicker } from '../../utils/colorPicker/PopoverPicker.js';
 
 export default function CreateCar() {
   const [color, setColor] = useState('#ccbbaa');

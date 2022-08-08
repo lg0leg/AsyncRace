@@ -1,6 +1,6 @@
 import './update-car.scss';
 import React, { useState } from 'react';
-import { PopoverPicker } from '../../utils/colorpick/PopoverPicker.js';
+import { PopoverPicker } from '../../utils/colorPicker/PopoverPicker.js';
 
 export default function UpdateCar() {
   const [color, setColor] = useState('#aabbcc');
