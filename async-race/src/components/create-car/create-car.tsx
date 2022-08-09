@@ -4,14 +4,19 @@ import { PopoverPicker } from '../../utils/colorPicker/PopoverPicker.js';
 
 export default function CreateCar() {
   const [color, setColor] = useState('#ccbbaa');
+  const [input, setInput] = useState('');
+
+  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value);
+  };
 
   const clickHandler = () => {
-    console.log('create color: ' + color);
+    console.log('Create car:' + '\n' + ' color: ' + color + '\n' + ' name: ' + input);
   };
 
   return (
     <div className="create-car">
-      <input type="text" className="choice-name" />
+      <input type="text" className="choice-name" onChange={inputHandler} />
       <div className="create-choice-color">
         <PopoverPicker color={color} onChange={setColor} />
       </div>
