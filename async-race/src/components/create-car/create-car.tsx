@@ -2,16 +2,12 @@ import './create-car.scss';
 import React, { useState } from 'react';
 import { PopoverPicker } from '../../utils/colorPicker/PopoverPicker.js';
 
-export default function CreateCar() {
+export default function CreateCar(props: { clickHandler: (arg0: string, arg1: string) => void }) {
   const [color, setColor] = useState('#ccbbaa');
-  const [input, setInput] = useState('');
+  const [inputValue, setInput] = useState('');
 
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
-  };
-
-  const clickHandler = () => {
-    console.log('Create car:' + '\n' + ' color: ' + color + '\n' + ' name: ' + input);
   };
 
   return (
@@ -20,7 +16,7 @@ export default function CreateCar() {
       <div className="create-choice-color">
         <PopoverPicker color={color} onChange={setColor} />
       </div>
-      <button type="button" className="create-button" onClick={clickHandler}>
+      <button type="button" className="create-button" onClick={() => props.clickHandler(color, inputValue)}>
         Create
       </button>
     </div>
