@@ -1,11 +1,26 @@
 import './race-line.scss';
+import { useEffect, useState } from 'react';
 import CarInstance from '../car-instance/car-instance';
 
 export default function Raceline(props: { key: number; name: string; color: string }) {
+  const [name, setName] = useState('');
+  const [color, setColor] = useState('');
+
+  useEffect(() => {
+    setName(props.name);
+    setColor(props.color);
+  }, [props.name, props.color]);
+
+  const selectButtonHandler = () => {
+    console.log(name, color);
+  };
+
   return (
     <div className="race-line-cont">
       <div className="car-select">
-        <button className="select-car">Select</button>
+        <button className="select-car" onClick={selectButtonHandler}>
+          Select
+        </button>
         <button className="select-car">Remove</button>
         <div className="car-title">{props.name}</div>
       </div>
