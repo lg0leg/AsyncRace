@@ -74,6 +74,11 @@ export default function Garage() {
     // console.log(`Create car: \n color - ${color} \n name - ${inputValue}`);
   };
 
+  const getSelectCar = (name: string, color: string) => {
+    console.log('garage');
+    console.log(name, color);
+  };
+
   return (
     <div className="garage">
       <div className="garage-controls">
@@ -92,7 +97,9 @@ export default function Garage() {
           Garage (<span>{cars.arrCars.length}</span>)
         </h1>
       </div>
-      <div className="garage-raceway">{currentItems && currentItems.map((item: CarItem, idx: number) => <Raceline key={idx + Math.random()} name={item.name} color={item.color} />)}</div>
+      <div className="garage-raceway">
+        {currentItems && currentItems.map((item: CarItem, idx: number) => <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} />)}
+      </div>
       <div className="garage-pagination">
         <ReactPaginate breakLabel="..." nextLabel="next" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="prev" renderOnZeroPageCount={() => null} />
       </div>
