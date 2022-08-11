@@ -70,13 +70,14 @@ export default function Garage() {
     setCars((previousState) => ({
       arrCars: [...previousState.arrCars, item],
     }));
-
-    // console.log(`Create car: \n color - ${color} \n name - ${inputValue}`);
   };
 
+  const [colorSC, setColorSC] = useState('#aabbcc');
+  const [inputValueSC, setInputSC] = useState('');
+
   const getSelectCar = (name: string, color: string) => {
-    console.log('garage');
-    console.log(name, color);
+    setInputSC(name);
+    setColorSC(color);
   };
 
   return (
@@ -84,7 +85,7 @@ export default function Garage() {
       <div className="garage-controls">
         <div className="garage-controls-1">
           <CreateCar clickHandler={createCar} />
-          <UpdateCar />
+          <UpdateCar name={inputValueSC} color={colorSC} />
         </div>
         <div className="garage-controls-2">
           <RaceBtn />
