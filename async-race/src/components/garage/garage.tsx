@@ -70,8 +70,22 @@ export default function Garage() {
     setCars((previousState) => ({
       arrCars: [...previousState.arrCars, item],
     }));
+  };
 
-    // console.log(`Create car: \n color - ${color} \n name - ${inputValue}`);
+  const [colorSC, setColorSC] = useState('#aabbcc');
+  const [inputValueSC, setInputSC] = useState('');
+
+  const getSelectCar = (name: string, color: string) => {
+    setInputSC(name);
+    setColorSC(color);
+  };
+
+  const updateCar = (name: string, color: string) => {
+    const idx = cars.arrCars.findIndex((item) => item.color === colorSC && item.name === inputValueSC);
+
+    setCars({
+      arrCars: [(cars.arrCars[idx] = { name: name, color: color }), ...cars.arrCars].slice(1),
+    });
   };
 
   return (
@@ -79,7 +93,7 @@ export default function Garage() {
       <div className="garage-controls">
         <div className="garage-controls-1">
           <CreateCar clickHandler={createCar} />
-          <UpdateCar />
+          <UpdateCar name={inputValueSC} color={colorSC} clickHandler={updateCar} />
         </div>
         <div className="garage-controls-2">
           <RaceBtn />
@@ -92,7 +106,9 @@ export default function Garage() {
           Garage (<span>{cars.arrCars.length}</span>)
         </h1>
       </div>
-      <div className="garage-raceway">{currentItems && currentItems.map((item: CarItem, idx: number) => <Raceline key={idx + Math.random()} name={item.name} color={item.color} />)}</div>
+      <div className="garage-raceway">
+        {currentItems && currentItems.map((item: CarItem, idx: number) => <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} />)}
+      </div>
       <div className="garage-pagination">
         <ReactPaginate breakLabel="..." nextLabel="next" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="prev" renderOnZeroPageCount={() => null} />
       </div>
