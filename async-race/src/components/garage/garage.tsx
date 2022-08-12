@@ -82,9 +82,15 @@ export default function Garage() {
 
   const updateCar = (name: string, color: string) => {
     const idx = cars.arrCars.findIndex((item) => item.color === colorSC && item.name === inputValueSC);
-
     setCars({
       arrCars: [(cars.arrCars[idx] = { name: name, color: color }), ...cars.arrCars].slice(1),
+    });
+  };
+
+  const removeCar = (name: string, color: string) => {
+    const idx = cars.arrCars.findIndex((item) => item.name === name && item.color === color);
+    setCars({
+      arrCars: [...cars.arrCars.slice(0, idx), ...cars.arrCars.slice(idx + 1)],
     });
   };
 
@@ -107,7 +113,10 @@ export default function Garage() {
         </h1>
       </div>
       <div className="garage-raceway">
-        {currentItems && currentItems.map((item: CarItem, idx: number) => <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} />)}
+        {currentItems &&
+          currentItems.map((item: CarItem, idx: number) => (
+            <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} removeButtonHandler={removeCar} />
+          ))}
       </div>
       <div className="garage-pagination">
         <ReactPaginate breakLabel="..." nextLabel="next" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="prev" renderOnZeroPageCount={() => null} />
