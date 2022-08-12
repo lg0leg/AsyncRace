@@ -80,12 +80,20 @@ export default function Garage() {
     setColorSC(color);
   };
 
+  const updateCar = (name: string, color: string) => {
+    const idx = cars.arrCars.findIndex((item) => item.color === colorSC && item.name === inputValueSC);
+
+    setCars({
+      arrCars: [(cars.arrCars[idx] = { name: name, color: color }), ...cars.arrCars].slice(1),
+    });
+  };
+
   return (
     <div className="garage">
       <div className="garage-controls">
         <div className="garage-controls-1">
           <CreateCar clickHandler={createCar} />
-          <UpdateCar name={inputValueSC} color={colorSC} />
+          <UpdateCar name={inputValueSC} color={colorSC} clickHandler={updateCar} />
         </div>
         <div className="garage-controls-2">
           <RaceBtn />
