@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/AsyncRace/static/css/main.db8435ce.css",
-    "main.js": "/AsyncRace/static/js/main.15b950d9.js",
+    "main.js": "/AsyncRace/static/js/main.ffc8076f.js",
     "index.html": "/AsyncRace/index.html",
     "main.db8435ce.css.map": "/AsyncRace/static/css/main.db8435ce.css.map",
-    "main.15b950d9.js.map": "/AsyncRace/static/js/main.15b950d9.js.map"
+    "main.ffc8076f.js.map": "/AsyncRace/static/js/main.ffc8076f.js.map"
   },
   "entrypoints": [
     "static/css/main.db8435ce.css",
-    "static/js/main.15b950d9.js"
+    "static/js/main.ffc8076f.js"
   ]
 }
