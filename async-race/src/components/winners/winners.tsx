@@ -59,8 +59,8 @@ function Winners() {
       </div>
       <div className="winners-list">
         <div className="winner-list-title">
-          <p className="wlt-item">Number</p>
-          <p className="wlt-item">Car</p>
+          <p className="wlt-item indent">Number</p>
+          <p className="wlt-item indent">Car</p>
           <p className="wlt-item">Name</p>
           <p className="wlt-item">Wins</p>
           <p className="wlt-item">Best time (seconds)</p>
