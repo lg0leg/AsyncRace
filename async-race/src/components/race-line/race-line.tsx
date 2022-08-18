@@ -40,7 +40,7 @@ export default function Raceline(props: {
       </div>
       <div className="car-cont">
         <div className="start-stop">
-          <button className={startClassNames} onClick={startButtonHandler}>
+          <button className={startClassNames} onClick={startButtonHandler} disabled={start}>
             Start
           </button>
           <button className="select-car stop-car">Stop</button>
