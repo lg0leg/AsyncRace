@@ -1,4 +1,5 @@
 import './race-line.scss';
+import ARApi from '../../utils/async-race-api';
 import { useEffect, useState } from 'react';
 import CarInstance from '../car-instance/car-instance';
 
@@ -9,6 +10,8 @@ export default function Raceline(props: {
   selectButtonHandler: (name: string, color: string) => void;
   removeButtonHandler: (name: string, color: string) => void;
 }) {
+  const Api = new ARApi();
+
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
   const [start, isStarted] = useState(false);
@@ -20,6 +23,17 @@ export default function Raceline(props: {
 
   const startButtonHandler = () => {
     isStarted(true);
+  };
+
+  const stopButtonHandler = () => {
+    console.log('press stop');
+    Api.getResource('/winners')
+      .then((body) => {
+        console.log(body);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   let startClassNames = 'select-car start-car';
@@ -40,10 +54,12 @@ export default function Raceline(props: {
       </div>
       <div className="car-cont">
         <div className="start-stop">
-          <button className={startClassNames} onClick={startButtonHandler}>
+          <button className={startClassNames} onClick={startButtonHandler} disabled={start}>
             Start
           </button>
-          <button className="select-car stop-car">Stop</button>
+          <button className="select-car stop-car" onClick={stopButtonHandler}>
+            Stop
+          </button>
         </div>
         <div className="race-line">
           <CarInstance color={props.color} />
