@@ -1,3 +1,5 @@
+import { CarItem } from './types';
+
 export default class ARApi {
   apiBase = 'http://127.0.0.1:3000';
 
@@ -9,5 +11,27 @@ export default class ARApi {
     }
 
     return await res.json();
+  }
+
+  async getCars() {
+    return await this.getResource(`/garage`);
+  }
+
+  async getCar(id: number) {
+    return await this.getResource(`/garage/${id}`);
+  }
+
+  async createCar(car: CarItem) {
+    await fetch(`${this.apiBase}/garage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(car),
+    });
+  }
+
+  async getWinners() {
+    return await this.getResource(`/winners`);
   }
 }

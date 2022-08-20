@@ -23,11 +23,13 @@ export default function Raceline(props: {
 
   const startButtonHandler = () => {
     isStarted(true);
+    console.log('press start button');
+    Api.createCar({ name: 'traktor', color: 'siniy' });
   };
 
   const stopButtonHandler = () => {
-    console.log('press stop');
-    Api.getResource('/winners')
+    console.log('press stop button');
+    Api.getCars()
       .then((body) => {
         console.log(body);
       })
