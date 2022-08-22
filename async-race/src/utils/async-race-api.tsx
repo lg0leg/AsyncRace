@@ -31,6 +31,22 @@ export default class ARApi {
     });
   }
 
+  async deleteCar(id: number) {
+    await fetch(`${this.apiBase}/garage/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async updateCar(id: number, car: CarItem) {
+    await fetch(`${this.apiBase}/garage/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(car),
+    });
+  }
+
   async getWinners() {
     return await this.getResource(`/winners`);
   }

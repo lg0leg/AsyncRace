@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { carList } from '../../utils/carNames/carNames';
 import { CarItem } from '../../utils/types';
+import ARApi from '../../utils/async-race-api';
 import CreateCar from '../create-car/create-car';
 import UpdateCar from '../update-car/update-car';
 import RaceBtn from '../race-button/race-button';
@@ -23,6 +24,7 @@ export default function Garage() {
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 7;
+  const Api = new ARApi();
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -57,8 +59,6 @@ export default function Garage() {
 
     // console.log('-----------------');
     // console.log(cars);
-    // console.log(Object.values(cars));
-    // console.log(Object.keys(cars));
     // console.log(currentItems);
   };
 
@@ -70,6 +70,8 @@ export default function Garage() {
     setCars((previousState) => ({
       arrCars: [...previousState.arrCars, item],
     }));
+
+    Api.createCar({ name: inputValue, color: color });
   };
 
   const [colorSC, setColorSC] = useState('#aabbcc');
@@ -85,6 +87,9 @@ export default function Garage() {
     setCars({
       arrCars: [(cars.arrCars[idx] = { name: name, color: color }), ...cars.arrCars].slice(1),
     });
+
+    // Api.updateCar(idx, {name: name, color: color})
+    Api.updateCar(2, { name: 'Mashina', color: 'Rozoviy' });
   };
 
   const removeCar = (name: string, color: string) => {
@@ -92,6 +97,9 @@ export default function Garage() {
     setCars({
       arrCars: [...cars.arrCars.slice(0, idx), ...cars.arrCars.slice(idx + 1)],
     });
+
+    // Api.deleteCar(idx);
+    Api.deleteCar(4);
   };
 
   return (
