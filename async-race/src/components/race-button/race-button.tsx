@@ -15,6 +15,7 @@ export default function RaceBtn() {
         console.log(err);
       });
   };
+
   return (
     <button className="race-button" onClick={raceButtonHandler}>
       Race
