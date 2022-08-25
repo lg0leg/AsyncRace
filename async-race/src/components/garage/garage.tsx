@@ -60,6 +60,7 @@ export default function Garage() {
     // console.log('-----------------');
     // console.log(cars);
     // console.log(currentItems);
+    newCars.forEach((car) => Api.createCar(car));
   };
 
   const createCar = (color: string, inputValue: string) => {
