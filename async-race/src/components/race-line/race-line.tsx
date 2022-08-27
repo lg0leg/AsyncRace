@@ -43,6 +43,8 @@ export default function Raceline(props: {
       .catch((err) => {
         console.log(err);
       });
+
+    isStarted(false);
   };
 
   let startClassNames = 'select-car start-car';
