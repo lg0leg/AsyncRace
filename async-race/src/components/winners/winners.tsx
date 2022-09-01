@@ -35,7 +35,6 @@ function Winners() {
     setItemOffset(newOffset);
   };
 
-  /*temporary array of winners*/
   useEffect(() => {
     Api.getWinners()
       .then((body) => {

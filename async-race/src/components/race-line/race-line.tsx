@@ -28,6 +28,13 @@ export default function Raceline(props: {
     Api.startEngine(2)
       .then((body) => {
         console.log(body);
+        // Api.switchEngineToDriveMode(2)
+        //   .then((body) => {
+        //     console.log(body);
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +43,7 @@ export default function Raceline(props: {
 
   const stopButtonHandler = () => {
     console.log('press stop button');
-    Api.switchEngineToDriveMode(2)
+    Api.stopEngine(2)
       .then((body) => {
         console.log(body);
       })
@@ -48,8 +55,10 @@ export default function Raceline(props: {
   };
 
   let startClassNames = 'select-car start-car';
+  let stopClassNames = 'select-car stop-car start-pressed';
   if (start) {
     startClassNames += ' start-pressed';
+    stopClassNames = 'select-car stop-car';
   }
 
   return (
@@ -68,7 +77,7 @@ export default function Raceline(props: {
           <button className={startClassNames} onClick={startButtonHandler} disabled={start}>
             Start
           </button>
-          <button className="select-car stop-car" onClick={stopButtonHandler}>
+          <button className={stopClassNames} onClick={stopButtonHandler} disabled={!start}>
             Stop
           </button>
         </div>
