@@ -22,11 +22,10 @@ export default function Raceline(props: {
   }, [props.name, props.color]);
 
   const startButtonHandler = () => {
-    isStarted(true);
-
     console.log('press start button');
     Api.startEngine(2)
       .then((body) => {
+        isStarted(true);
         console.log(body);
         // Api.switchEngineToDriveMode(2)
         //   .then((body) => {
