@@ -1,12 +1,12 @@
 import './winners.scss';
 import ARApi from '../../utils/async-race-api';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IWinner, iWinnerApi } from '../../utils/types';
 import ReactPaginate from 'react-paginate';
 import WinnerInstance from '../winner-instance/winner-instance';
 
 function Winners() {
-  const Api = new ARApi();
+  const Api = useMemo(() => new ARApi(), []);
 
   const [winners, setWinners] = useState<{ arrWinners: IWinner[] }>({
     arrWinners: [],
@@ -58,7 +58,7 @@ function Winners() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [Api]);
 
   return (
     <div className="winners">
