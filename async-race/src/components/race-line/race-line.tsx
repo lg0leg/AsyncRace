@@ -23,21 +23,25 @@ export default function Raceline(props: {
 
   const startButtonHandler = () => {
     console.log('press start button');
-    Api.startEngine(2)
-      .then((body) => {
-        isStarted(true);
+    Api.startEngine(2).then((body) => {
+      isStarted(true);
+      const drive = setInterval(() => console.log('brr'), 100);
+      console.log(body);
+      Api.switchEngineToDriveMode(2).then((body) => {
+        clearInterval(drive);
         console.log(body);
-        // Api.switchEngineToDriveMode(2)
-        //   .then((body) => {
-        //     console.log(body);
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //   });
-      })
-      .catch((err) => {
-        console.log(err);
+        Api.stopEngine(2).then((bodyF) => {
+          console.log(bodyF);
+        });
+        isStarted(false);
       });
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+    });
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   };
 
   const stopButtonHandler = () => {

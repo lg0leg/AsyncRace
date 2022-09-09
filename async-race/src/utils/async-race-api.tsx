@@ -69,10 +69,15 @@ export default class ARApi {
     const res = await fetch(`${this.apiBase}/engine?id=${id}&status=drive`, {
       method: 'PATCH',
     });
-    if (!res.ok) {
-      throw new Error(`Статус ошибки: ${res.status}`);
+    if (res.ok) {
+      return 'arrived';
+    } else if (res.status === 500) {
+      return 'stopped';
     }
-    return await res.json();
+    // if (!res.ok) {
+    //   throw new Error(`Статус ошибки: ${res.status}`);
+    // }
+    // return await res.json();
   }
 
   async getWinners() {
