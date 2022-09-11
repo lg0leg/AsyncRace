@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect, useState } from 'react';
 import './car-instance.scss';
 
-export default function CarInstance(props: { color: string }) {
+export default function CarInstance(props: { color: string; time: number; distance: string }) {
   const carRef: RefObject<SVGSVGElement> = React.createRef();
   const carBodyRef: RefObject<SVGPathElement> = React.createRef();
 
@@ -9,20 +9,28 @@ export default function CarInstance(props: { color: string }) {
     carBodyRef.current!.style.fill = color;
   };
 
-  const [distance, setDistance] = useState('1500px');
-  const [time, setTime] = useState(5000);
+  const [distance, setDistance] = useState('0px');
+  const [time, setTime] = useState(0);
 
   useEffect(() => {
     setColor(props.color);
   });
 
   useEffect(() => {
+    setDistance(props.distance);
+    setTime(props.time);
+
     carRef.current!.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${distance})` }], {
       duration: time,
-      // iterations: 1,
-      iterations: Infinity,
+      iterations: 1,
+      // iterations: Infinity,
+      fill: 'forwards',
     });
-  });
+  }, [distance, time, props.distance, props.time]);
+
+  // const stopCar = () => {
+  //   console.log('ZAGLOH!!!');
+  // };
 
   return (
     <svg ref={carRef} className="car-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.731 132.334">
