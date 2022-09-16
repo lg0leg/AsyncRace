@@ -34,29 +34,14 @@ export default function Raceline(props: {
       setDistance(`${racelineRef.current!.offsetWidth * 0.91}px`);
       isStarted(true);
 
-      // let time = body.distance / (body.velocity * 1000);
-      // const drive = setInterval(() => {
-      //   time -= 0.1;
-      //   console.log('brr ' + Math.round(time * 100) / 100);
-      // }, 100);
-      // console.log('raceline width: ' + racelineRef.current?.offsetWidth);
-      // console.log('speed: ' + body.velocity);
-
       Api.switchEngineToDriveMode(2).then((body) => {
-        // clearInterval(drive);
         console.log(body);
         Api.stopEngine(2).then((bodyF) => {
           console.log('speed: ' + bodyF.velocity);
         });
         isStarted(false);
       });
-      // .catch((err) => {
-      //   console.log(err);
-      // });
     });
-    // .catch((err) => {
-    //   console.log(err);
-    // });
   };
 
   const stopButtonHandler = () => {
@@ -64,9 +49,6 @@ export default function Raceline(props: {
     Api.stopEngine(2).then((body) => {
       console.log(body);
     });
-    // .catch((err) => {
-    //   console.log(err);
-    // });
 
     isStarted(false);
   };
