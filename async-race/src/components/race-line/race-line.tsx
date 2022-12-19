@@ -13,8 +13,8 @@ export default function Raceline(props: {
 }) {
   const Api = new ARApi();
 
-  const carRef: RefObject<SVGSVGElement> = useRef(null);
-  // const carRef: RefObject<SVGSVGElement> = React.createRef();
+  const carRef = useRef<SVGSVGElement>(null);
+  let carAnim = useRef<Animation | null>(null);
 
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
@@ -30,28 +30,20 @@ export default function Raceline(props: {
     setColor(props.color);
   }, [props.name, props.color]);
 
-  // useEffect(() => {
-  //   const carAnim = carRef.current!.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${distance})` }], {
-  //     duration: time,
-  //     iterations: 1,
-  //     fill: 'forwards',
-  //   });
-
-  //   start === false ? carAnim.pause() : carAnim.play();
-  //   // }, [distance, time, start]);
-  // }, [start]);
-
-  let carAnim: Animation;
-
   useEffect(() => {
-    carAnim = carRef.current!.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${distance})` }], {
-      duration: time,
-      iterations: 1,
-      fill: 'forwards',
-    });
+    if (start === true) {
+      carAnim.current = carRef.current!.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${distance})` }], {
+        duration: time,
+        iterations: 1,
+        fill: 'forwards',
+      });
+    }
 
-    // start === false ? carAnim.pause() : carAnim.play();
-  }, [start]);
+    if (start === false && carAnim.current) {
+      carAnim.current.pause();
+    }
+    // start === false ? carAnim.current.pause() : carAnim.current.play();
+  }, [start, distance, time]);
 
   const startButtonHandler = () => {
     console.log('press start button');
@@ -77,7 +69,7 @@ export default function Raceline(props: {
       isStarted(false);
     });
 
-    carAnim.pause();
+    carAnim.current!.pause();
   };
 
   let startClassNames = 'select-car start-car';
