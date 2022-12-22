@@ -49,15 +49,16 @@ export default function Raceline(props: {
     console.log('press start button');
     Api.startEngine(2).then((body) => {
       setTime(body.distance / body.velocity);
-      setDistance(`${racelineRef.current!.offsetWidth * 0.91}px`);
+      setDistance(`${racelineRef.current!.offsetWidth * 0.9}px`);
       isStarted(true);
 
       Api.switchEngineToDriveMode(2).then((body) => {
         console.log(body);
         Api.stopEngine(2).then((bodyF) => {
           console.log('speed: ' + bodyF.velocity);
+          carAnim.current!.pause();
+          isStarted(false);
         });
-        isStarted(false);
       });
     });
   };
@@ -66,10 +67,9 @@ export default function Raceline(props: {
     console.log('press stop button');
     Api.stopEngine(2).then((body) => {
       console.log(body);
+      carAnim.current!.pause();
       isStarted(false);
     });
-
-    carAnim.current!.pause();
   };
 
   let startClassNames = 'select-car start-car';
