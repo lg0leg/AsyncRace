@@ -25,6 +25,7 @@ export default function Garage() {
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 7;
   const Api = new ARApi();
+  const [resetRace, setResetRace] = useState(false);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -112,7 +113,7 @@ export default function Garage() {
         </div>
         <div className="garage-controls-2">
           <RaceBtn />
-          <ResetBtn />
+          <ResetBtn setResetRace={setResetRace} />
           <GenerateCarsBtn clickHandler={generateCars} />
         </div>
       </div>
@@ -124,7 +125,7 @@ export default function Garage() {
       <div className="garage-raceway">
         {currentItems &&
           currentItems.map((item: CarItem, idx: number) => (
-            <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} removeButtonHandler={removeCar} />
+            <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} removeButtonHandler={removeCar} resetRace={resetRace} />
           ))}
       </div>
       <div className="garage-pagination">

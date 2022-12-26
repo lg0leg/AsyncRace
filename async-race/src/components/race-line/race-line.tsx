@@ -10,6 +10,7 @@ export default function Raceline(props: {
   color: string;
   selectButtonHandler: (name: string, color: string) => void;
   removeButtonHandler: (name: string, color: string) => void;
+  resetRace: boolean;
 }) {
   const Api = new ARApi();
 
@@ -44,6 +45,13 @@ export default function Raceline(props: {
     }
     // start === false ? carAnim.current.pause() : carAnim.current.play();
   }, [start, distance, time]);
+
+  useEffect(() => {
+    if (props.resetRace === true && carAnim.current) {
+      carAnim.current!.cancel();
+      isStarted(false);
+    }
+  }, [props.resetRace]);
 
   const startButtonHandler = () => {
     console.log('press start button');
