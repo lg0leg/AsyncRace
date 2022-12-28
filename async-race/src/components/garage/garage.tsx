@@ -10,6 +10,7 @@ import RaceBtn from '../race-button/race-button';
 import ResetBtn from '../reset-button/reset-button';
 import GenerateCarsBtn from '../generate-cars-button/generate-cars-button';
 import Raceline from '../race-line/race-line';
+import Popup from '../popup/popup';
 
 export default function Garage() {
   const [cars, setCars] = useState<{ arrCars: CarItem[] }>({
@@ -26,6 +27,7 @@ export default function Garage() {
   const itemsPerPage = 7;
   const Api = new ARApi();
   const [resetRace, setResetRace] = useState(false);
+  const [resultVisible, setResultVisible] = useState(false);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -127,6 +129,7 @@ export default function Garage() {
           currentItems.map((item: CarItem, idx: number) => (
             <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} removeButtonHandler={removeCar} resetRace={resetRace} />
           ))}
+        <Popup popupVisible={resultVisible} setPopupVisible={setResultVisible} children={<p>Pobeda!</p>} />
       </div>
       <div className="garage-pagination">
         <ReactPaginate breakLabel="..." nextLabel="next" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="prev" renderOnZeroPageCount={() => null} />
