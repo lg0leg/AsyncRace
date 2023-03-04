@@ -11,6 +11,10 @@ export default function Raceline(props: {
   selectButtonHandler: (name: string, color: string) => void;
   removeButtonHandler: (name: string, color: string) => void;
   resetRace: boolean;
+  winnerName: string;
+  setWinnerName: React.Dispatch<React.SetStateAction<string>>;
+  setWinnerTime: React.Dispatch<React.SetStateAction<string>>;
+  carPosition: number;
 }) {
   const Api = new ARApi();
 
@@ -55,14 +59,26 @@ export default function Raceline(props: {
 
   const startButtonHandler = () => {
     console.log('press start button');
-    Api.startEngine(2).then((body) => {
+    console.log('num: ' + props.carPosition);
+
+    Api.startEngine(props.carPosition).then((body) => {
       setTime(body.distance / body.velocity);
+      const resTime = body.distance / (body.velocity * 1000);
       setDistance(`${racelineRef.current!.offsetWidth * 0.9}px`);
       isStarted(true);
 
-      Api.switchEngineToDriveMode(2).then((body) => {
+      Api.switchEngineToDriveMode(props.carPosition).then((body) => {
+        if (body === 'arrived' && props.winnerName === '-') {
+          console.log('pobeditel: ');
+          console.log(name);
+          console.log('time ' + resTime);
+          console.log(resTime.toFixed(2));
+
+          props.setWinnerName(name);
+          props.setWinnerTime(`${resTime.toFixed(2)}s`);
+        }
         console.log(body);
-        Api.stopEngine(2).then((bodyF) => {
+        Api.stopEngine(props.carPosition).then((bodyF) => {
           console.log('speed: ' + bodyF.velocity);
           carAnim.current!.pause();
           isStarted(false);
@@ -73,7 +89,7 @@ export default function Raceline(props: {
 
   const stopButtonHandler = () => {
     console.log('press stop button');
-    Api.stopEngine(2).then((body) => {
+    Api.stopEngine(props.carPosition).then((body) => {
       console.log(body);
       carAnim.current!.pause();
       isStarted(false);

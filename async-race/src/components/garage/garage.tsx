@@ -28,6 +28,22 @@ export default function Garage() {
   const Api = new ARApi();
   const [resetRace, setResetRace] = useState(false);
   const [resultVisible, setResultVisible] = useState(false);
+  const [winnerName, setWinnerName] = useState('-');
+  const [winnerTime, setWinnerTime] = useState('-');
+
+  useEffect(() => {
+    if (winnerName !== '-') {
+      setResultVisible(true);
+    }
+  }, [winnerName]);
+
+  // 4 cars on the server already have, add 3 more for the set
+
+  useEffect(() => {
+    Api.createCar({ name: 'Audi', color: '#ffffff' });
+    Api.createCar({ name: 'Peugeot', color: '#f6003c' });
+    Api.createCar({ name: 'Moskvich', color: '#1f640a' });
+  }, []);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -63,7 +79,8 @@ export default function Garage() {
     // console.log('-----------------');
     // console.log(cars);
     // console.log(currentItems);
-    newCars.forEach((car) => Api.createCar(car));
+
+    // newCars.forEach((car) => Api.createCar(car));
   };
 
   const createCar = (color: string, inputValue: string) => {
@@ -71,11 +88,12 @@ export default function Garage() {
       name: inputValue,
       color: color,
     };
+
     setCars((previousState) => ({
       arrCars: [...previousState.arrCars, item],
     }));
 
-    Api.createCar({ name: inputValue, color: color });
+    // Api.createCar({ name: inputValue, color: color });
   };
 
   const [colorSC, setColorSC] = useState('#aabbcc');
@@ -93,7 +111,7 @@ export default function Garage() {
     });
 
     // Api.updateCar(idx, {name: name, color: color})
-    Api.updateCar(2, { name: 'Mashina', color: 'Rozoviy' });
+    // Api.updateCar(2, { name: 'Mashina', color: 'Rozoviy' });
   };
 
   const removeCar = (name: string, color: string) => {
@@ -103,7 +121,7 @@ export default function Garage() {
     });
 
     // Api.deleteCar(idx);
-    Api.deleteCar(4);
+    // Api.deleteCar(4);
   };
 
   return (
@@ -127,9 +145,28 @@ export default function Garage() {
       <div className="garage-raceway">
         {currentItems &&
           currentItems.map((item: CarItem, idx: number) => (
-            <Raceline key={idx + Math.random()} name={item.name} color={item.color} selectButtonHandler={getSelectCar} removeButtonHandler={removeCar} resetRace={resetRace} />
+            <Raceline
+              key={idx + Math.random()}
+              name={item.name}
+              color={item.color}
+              selectButtonHandler={getSelectCar}
+              removeButtonHandler={removeCar}
+              resetRace={resetRace}
+              winnerName={winnerName}
+              setWinnerName={setWinnerName}
+              setWinnerTime={setWinnerTime}
+              carPosition={idx + 1}
+            />
           ))}
-        <Popup popupVisible={resultVisible} setPopupVisible={setResultVisible} children={<p>Pobeda!</p>} />
+        <Popup
+          popupVisible={resultVisible}
+          setPopupVisible={setResultVisible}
+          children={
+            <p>
+              {winnerName} went first! {winnerTime}
+            </p>
+          }
+        />
       </div>
       <div className="garage-pagination">
         <ReactPaginate breakLabel="..." nextLabel="next" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="prev" renderOnZeroPageCount={() => null} />
